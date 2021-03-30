@@ -1,6 +1,5 @@
 import re
 import pandas as pd
-import numpy as np
 from sklearn.feature_extraction.text import TfidfVectorizer
 from sklearn.metrics import classification_report
 from sklearn.model_selection import train_test_split
@@ -12,9 +11,9 @@ def foo():
     thesis_data = thesis_data.dropna(axis=0, how='any')
 
     # 获取特征值和目标值
-    features_values = [re.sub(r':|\r|\n|\t', '', i) for i in thesis_data['Keywords']]
+    features_values = [re.sub(r':|\r|\n|\t|;', ' ', i) for i in thesis_data['Journal']]
 
-    targets_values = [re.sub(r':|\r|\t|\n', '', i) for i in thesis_data['Categories']]
+    targets_values = [re.sub(r':|\r|\t|\n', ' ', i) for i in thesis_data['Categories']]
 
     # 分割训练集和测试集
     x_train, x_test, y_train, y_test = train_test_split(features_values, targets_values, test_size=0.25)
@@ -39,4 +38,5 @@ def foo():
     print(classification_report(y_test, y_predict))
 
 
-foo()
+if __name__ == '__main__':
+    foo()
