@@ -6,6 +6,9 @@ __pycache__/
 # fangda
 .idea
 
+# data
+data/
+
 # C extensions
 *.so
 
